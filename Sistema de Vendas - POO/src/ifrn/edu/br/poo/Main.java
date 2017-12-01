@@ -27,7 +27,7 @@ public class Main {
 	    Produto prod[] = new Produto[100];
 	    boolean check = false;
 	    Laticinios milk = new Laticinios();
-	    Inicio initio = new Inicio();
+	    Inicio inicio = new Inicio();
 	    
 	    //Login no sistema
 	    System.out.print("Login: ");
@@ -36,9 +36,9 @@ public class Main {
 	    System.out.print("Password: ");
 	    String password = scan.next();
 	    
-	    initio.setLogin(login);
-	    initio.setPassword(password);
-	    v1.setOperador(initio.getLogin());
+	    inicio.setLogin(login);
+	    inicio.setPassword(password);
+	    v1.setOperador(inicio.getLogin());
 	    
         boolean checar_Login = checaLogin(login, password);  //Acesso ao banco de dados
 	    
