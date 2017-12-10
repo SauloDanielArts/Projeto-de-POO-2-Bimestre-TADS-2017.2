@@ -1,25 +1,61 @@
 package ifrn.edu.br.poo;
 
-public abstract class Produto {
-   private String tipo;
-   private double value;
+public class Produto {
    
-   public void setTipo(String tip) {
-	   tipo = tip;
+	//Não se faz necessário o uso de descrição pois foge dos requisitos de um caixa.
+	
+   private String code;
+   private String nome;
+   private double valor;
+   private int quantidade;
+   
+   Produto()
+   {
+	   code = "00000000";
+	   nome = "VAZIO";
+	   valor = 0;
+	   quantidade = 0;
    }
    
-   public void setValue(double valor) {
-	   value = valor;
+   Produto(String code, String nome, double valor,int quantidade)
+   {
+	   this.setCode(code);
+	   this.setNome(nome);
+	   this.setValor(valor);
+	   this.setQuantidade(quantidade);
    }
+
+public String getCode() {
+	return code;
+}
+
+public void setCode(String code) {
+	this.code = code;
+}
+
+public String getNome() {
+	return nome;
+}
+
+public void setNome(String nome) {
+	this.nome = nome;
+}
+
+public double getValor() {
+	return valor;
+}
+
+public void setValor(double valor) {
+	this.valor = valor;
+}
+
+public int getQuantidade() {
+	return quantidade;
+}
+
+public void setQuantidade(int quantidade) {
+	this.quantidade = quantidade;
+}
    
-   public String getTipo() {
-	   return tipo;
-   }
-   
-   public double getValue() {
-	   return value;
-   }
-   
-   public abstract double taxa(double a);
   
 }

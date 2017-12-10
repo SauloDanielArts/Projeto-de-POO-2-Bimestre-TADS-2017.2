@@ -1,41 +1,34 @@
 package ifrn.edu.br.poo;
+import java.util.HashMap;
+
 
 public class Venda {
-   private Produto venda[] = new Produto[100];
+   private HashMap<String,Produto> produtos = new HashMap<String,Produto>();
    private double total;
-   private String operador;
    
    public Venda() {
 	   total = 0;
-	   operador = "Computador";
    }
    
    public double getTotal() {
 	   return total;
    }
    
-   public String getOperador() {
-	   return operador;
+   public Produto getVenda(String string) {
+	   Produto produto = produtos.get(string);
+	   return produto;
    }
    
-   public Produto getVenda(int value) {
-		   return venda[value];
-   }
-   
-   public void setOperador(String nome) {
-	   operador = nome;
-   }
-   
-   public boolean setVenda(Produto product) {
+   public boolean setVenda(String chave, Produto product) {
 	   boolean check = false;
-	   for(int i = 0; i < 100; i++) {
-		   if(venda[i] == null) {
-			   venda[i] = product;
-			   check = true;
-			   break;
-		   }
+       Produto p;
+	   produtos.put(chave, product);
+	   p = produtos.get(chave);
+	   if(p.equals(product)) {
+			check = true;
 	   }
-	   return check;
+
+		return check;
    }
    
    public void calculaTotal(double tot) {

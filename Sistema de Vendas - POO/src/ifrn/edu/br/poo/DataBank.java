@@ -1,27 +1,58 @@
+
 package ifrn.edu.br.poo;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class DataBank {
-    private String login[] = {"Aline", "Karla", "Eduardo", "Saulo", "Diego", "Paulo", "Celso"};
-    private String password[] = {"135829abc", "a45Gj953", "S3592K_23", "45_Fthw128", "12_wyFW_45", "95_94_hFw-ir", "ArN4_83k-N"};
+
+    private ArrayList <Operador> operator = new ArrayList<Operador>();
     
-    public boolean search_login(String t) {
+    
+    public void setOperator(Operador t) {
+    	operator.add(t);
+    }
+    
+
+    public boolean searchLogin(Operador a) {
     	boolean check = false;
-    	
-    	for(int i = 0; i < 7; i++) {
-    		if(login[i].equals(t)) {
+    	String log = a.getLogin();
+    	for(Operador nome : operator) {
+    		String string = nome.getLogin();
+    		
+    		if(string.equals(log)) {
     			check = true;
     		}
     	}
+    	
     	return check;
     }
     
-    public boolean search_password(String b) {
+    public boolean searchPassword(Operador a) {
     	boolean check = false;
-    	
-    	for(int i = 0; i < 7; i++) {
-    		if(password[i].equals(b)) {
+    	String pass = a.getPassword();
+    	for(Operador nome : operator) {
+            String string = nome.getPassword();
+    		if(pass.equals(string)) {
     			check = true;
     		}
+    	}
+    	
+    	return check;
+    }
+    
+    public boolean apagaOperador(String string) {
+    	boolean check = false;
+    	int i = 0;
+    	for(Operador op : operator) {
+    		String operador = op.getLogin();
+    		i++;
+    		if(operador.equals(string)) {
+    			op = null;
+    		}
+    		
+    		if(operator.get(i) == null) {
+				check = true;	
+			}
     	}
     	return check;
     }

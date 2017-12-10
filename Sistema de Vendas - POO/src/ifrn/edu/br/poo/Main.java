@@ -1,186 +1,294 @@
 package ifrn.edu.br.poo;
-
-
-import ifrn.edu.br.poo.Venda;
-import ifrn.edu.br.poo.Cafe;
-import ifrn.edu.br.poo.Laticinios;
-import ifrn.edu.br.poo.Refrigerante;
-import ifrn.edu.br.poo.Pao;
-import ifrn.edu.br.poo.Produto;
 import java.util.Scanner;
-import ifrn.edu.br.poo.Login;
-import ifrn.edu.br.poo.Inicio;
-import ifrn.edu.br.poo.DataBank;
+import java.util.ArrayList;
 
 public class Main {
+	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-	    System.out.println("       Sistema de vendas");
-	    System.out.println("\n");
-	    
-	    //Bloco de instância e criação de objetos
-	    Venda v1 = new Venda();
-	    Cafe cafe = new Cafe();
-	    Refrigerante refri = new Refrigerante();
-	    Pao pao = new Pao();
-	    Laticinios leite = new Laticinios();
-	    Produto prod[] = new Produto[100];
-	    boolean check = false;
-	    Laticinios milk = new Laticinios();
-	    Inicio inicio = new Inicio();
-	    
-	    //Login no sistema
-	    System.out.print("Login: ");
-	    String login = scan.next();
-	    System.out.println("");
-	    System.out.print("Password: ");
-	    String password = scan.next();
-	    
-	    inicio.setLogin(login);
-	    inicio.setPassword(password);
-	    v1.setOperador(inicio.getLogin());
-	    
-        boolean checar_Login = checaLogin(login, password);  //Acesso ao banco de dados
-	    
-        if(checar_Login == true) {	
-	    
-	    String tipo;
-	    double valor, valor_2, valor_total;
-	    
-	    String codigo = "010101";
-	    int i = 0;
-	     
-	    //Processo de funcionamento do Sistema de Vendas
-	    while(!codigo.equals("00000")) {      //O processo para quando recebe o codigo de barras 00000
-	        System.out.println("\n         Operador: "+v1.getOperador());
-	    	check = false;
-	    	System.out.println("\nDigite o codigo de barras: ");
-		    codigo = scan.next();
-	    	
-	    	if(codigo.equals("12849001") | codigo.equals("99450001982") | codigo.equals("350962135") | codigo.equals("4410238512") | codigo.equals("2011325964") | codigo.equals("7500112372") | codigo.equals("1644140194") | codigo.equals("39402012")) {
-	    	    tipo = milk.getTipo(codigo);
-	    		valor = milk.getValue(codigo);
-	    		valor_2 = milk.taxa(valor);
-	    		valor_total = valor + valor_2;
-	    		
-	    		milk.setTipo(tipo);     //Procura item Laticinio e coloca no atributo de Produto
-	    	    milk.setValue(valor_total);   //Procura preço Laticinio e coloca no atributo de Produto
-	    	    check = v1.setVenda(milk);  //Coloca o produto no registro de vendas
-	    	    
-	    	    if(check == true) {
-	    	    	System.out.println("Registrado com sucesso!");
-	    	    } else {
-	    	    	System.out.println("Item não registrado!");
-	    	    }
-	    	    
-	    	    prod[i] = v1.getVenda(i);
-	    	    v1.calculaTotal(prod[i].getValue());
-	    	    
-	    	    System.out.println("Venda: "+prod[i].getTipo());          //Registro da venda
-	    	    System.out.println("Venda: "+prod[i].getValue());
-	    	    System.out.println("Total: "+v1.getTotal());
-	    	}
-	    	
-	    	if(codigo.equals("45001284") | codigo.equals("1003748999") | codigo.equals("4481090012") | codigo.equals("190002851") | codigo.equals("2000358190")) {
-	    		tipo = pao.getTipo(codigo);
-	    		valor = pao.getValue(codigo);
-	    		valor_2 = pao.taxa(valor);
-	    		valor_total = valor + valor_2;
-	    		
-	    		pao.setTipo(tipo);     
-	    	    pao.setValue(valor_total);   
-	    	    check = v1.setVenda(pao);  //Coloca o produto no registro de vendas
-	    	    
-	    	    if(check == true) {
-	    	    	System.out.println("Registrado com sucesso!");
-	    	    } else {
-	    	    	System.out.println("Item não registrado!");
-	    	    }
-	    	    
-	    	    prod[i] = v1.getVenda(i);
-	    	    v1.calculaTotal(prod[i].getValue());
-	    	    
-	    	    System.out.println("Venda: "+prod[i].getTipo());          //Registro da venda
-	    	    System.out.println("Venda: "+prod[i].getValue());
-	    	    System.out.println("Total: "+v1.getTotal());
-	    	}
-	    	
-	    	if(codigo.equals("3992020") | codigo.equals("50010990") | codigo.equals("25720158") | codigo.equals("1003294045")) {
-	    		tipo = refri.getTipo(codigo);
-	    		valor = refri.getValue(codigo);
-	    		valor_2 = refri.taxa(valor);
-	    		valor_total = valor + valor_2;
-	    		
-	    		refri.setTipo(tipo);     
-	    	    refri.setValue(valor_total);   
-	    	    check = v1.setVenda(refri);  //Coloca o produto no registro de vendas
-	    	    
-	    	    if(check == true) {
-	    	    	System.out.println("Registrado com sucesso!");
-	    	    } else {
-	    	    	System.out.println("Item não registrado!");
-	    	    }
-	    	    
-	    	    prod[i] = v1.getVenda(i);
-	    	    v1.calculaTotal(prod[i].getValue());
-	    	    
-	    	    System.out.println("Venda: "+prod[i].getTipo());          //Registro da venda
-	    	    System.out.println("Venda: "+prod[i].getValue());
-	    	    System.out.println("Total: "+v1.getTotal());
-	    	}
-	    	
-	    	if(codigo.equals("3991820") | codigo.equals("55718291") | codigo.equals("44829102") | codigo.equals("34918201") | codigo.equals("112000129") | codigo.equals("110233918") | codigo.equals("220011883")) {
-	    		tipo = cafe.getTipo(codigo);
-	    		valor = cafe.getValue(codigo);
-	    		valor_2 = cafe.taxa(valor);
-	    		valor_total = valor + valor_2;
-	    		
-	    		cafe.setTipo(tipo);     
-	    	    cafe.setValue(valor_total);   
-	    	    check = v1.setVenda(cafe);  //Coloca o produto no registro de vendas
-	    	    
-	    	    if(check == true) {
-	    	    	System.out.println("Registrado com sucesso!");
-	    	    } else {
-	    	    	System.out.println("Item não registrado!");
-	    	    }
-	    	    
-	    	    prod[i] = v1.getVenda(i);
-	    	    v1.calculaTotal(prod[i].getValue());
-	    	    
-	    	    System.out.println("Venda: "+prod[i].getTipo());          //Registro da venda
-	    	    System.out.println("Venda: "+prod[i].getValue());
-	    	    System.out.println("Total: "+v1.getTotal());
-	    	}
-	    	i++;
-	   }
-	    
-	    System.out.println("\n");
-	    System.out.println("Dinheiro: ");
-	    double entrada = scan.nextDouble();
-	    
-	    if(entrada >= v1.getTotal()) {
-	    	double troco = (entrada - v1.getTotal());
-	    	System.out.println("Troco: "+troco);
-	    }
-	    
-	    System.out.println("\n\n       VOLTE SEMPRE!");
-      } else {
-    	  System.out.println("Dados do login errados!");
-      }
-	}
-	
-	public static boolean checaLogin(String nome, String senha) {
-		DataBank db = new DataBank();
-		boolean check = false;
+		Operador op = new Operador();
+    	Produto p = new Produto();
+    	DataBank db = new DataBank();
+    	ProductBank pb = new ProductBank();
+    	Venda sell = new Venda();
+
 		
-		for(int i = 0; i < 7; i++) {
-			if(db.search_login(nome) & db.search_password(senha)) {
-				 check = true;
+		ArrayList<Produto> produtos = new ArrayList<Produto>();
+		
+		int option = -1;
+		
+		while(option != 0) {
+			System.out.println("       Sistema de vendas");
+	        System.out.println("\n");
+			System.out.println("1 - Login;");
+			System.out.println("2 - Configurações do sistema.");
+			System.out.println("0 - Sair");
+			System.out.println("\n");
+			System.out.print("Escolha: ");
+			int choice = scan.nextInt();
+			
+			if(choice == 1) {           //Login
+				op.escolheOperador();
+		    	
+		    	System.out.println("            Sistema de Vendas");
+		    	System.out.println("\n");
+		    	System.out.print("Login: ");
+		    	String log = scan.next();
+		    	System.out.println("");
+		    	System.out.print("Senha: ");
+		    	String password = scan.next();
+		    	
+		    	op.setLogin(log);
+		    	op.setPassword(password);
+		    	
+		    	boolean check_login = db.searchLogin(op);
+		    	boolean check_password = db.searchPassword(op);
+		    	
+		    	if(check_login & check_password) {
+		    	  int choice2 = -1;
+		    	  while(choice2 != 3) {
+		    		  System.out.println("");
+			    		System.out.println("1 - Abrir painel de vendas;");
+			    		System.out.println("2 - Procurar item");
+			    		System.out.println("3 - Sair");
+			    		System.out.println("");
+			    		System.out.println("Escolha: ");
+			    		choice2 = scan.nextInt();
+			    		
+			    		if(choice2 == 1) {       //Abrir o painel de vendas
+			    			
+			    			String code = "010101";
+			    			//Consertar este while
+			    			while(!code.equals("00000")) {    //O processo para quando recebe o codigo de barras 00000
+			    				System.out.println("");
+				    			System.out.println("");
+				    			System.out.println("            Painel de Vendas");
+				    			System.out.println("Operador: "+op.getLogin());
+				    			System.out.println("");
+				    			System.out.print("\nNº de produtos: ");
+				    			int num = scan.nextInt();
+				    			System.out.print("Código de Barras: ");
+				    			code = scan.next();
+				    			if(!code.equals("00000")) {
+				    				pb.diminuiQtde(code, num);
+					    			p = pb.getItem(code);
+					    			boolean checa = sell.setVenda(code, p);
+					    			sell.calculaTotal(p.getValor());
+					    			
+					    			if(checa == true) {
+					    				System.out.println("");
+					    				System.out.println("Nome: "+p.getNome());
+					    				System.out.println("Valor: "+p.getValor());
+					    				System.out.println("Qtde: "+p.getQuantidade());
+					    				System.out.println("Total: "+sell.getTotal());
+					    			} else {
+					    				System.out.println("");
+					    				System.out.println("Produto não cadastrado!");
+					    			}
+				    			}
+			    			}
+			    			
+			    			boolean valor_ok = false;
+			    		    
+			    		    System.out.println("\n");
+			    		    System.out.println("Dinheiro: ");
+			    		    double entrada = scan.nextDouble();
+			    		    
+			    		    if(entrada >= sell.getTotal()) {
+			    		    	double troco = (entrada - sell.getTotal());
+			    		    	System.out.println("Troco: "+troco);
+			    		    	valor_ok=true;
+			    		      }
+			    		    else
+	  	    		         {
+			    		    	System.out.println("Atenção! Quantidade de dinheioro insuficiente.");
+			    		    }
+			    		    
+			    		    System.out.println("\n\n       VOLTE SEMPRE!");
+			    			
+
+			    		} else if(choice2 == 2) {     //Procurar item
+			    			
+			    			String string = "01110";
+			    			while(!string.equals("00000")) {
+			    				System.out.println("");
+				    		    System.out.println("");
+				    			System.out.print("Código de barras: ");
+				    			string = scan.next();
+				    			p = pb.getItem(string);
+				    				
+				    			if(p != null) {
+				    				System.out.println("");
+				    				System.out.println("Nome: "+p.getNome());
+				    				System.out.println("Código de barras: "+p.getCode());
+				    				System.out.println("Valor: "+p.getValor());
+				    				System.out.println("Quantidade: "+p.getQuantidade());
+				    				System.out.println("");
+				    				System.out.println("");
+				    			} else {
+				    			    System.out.println("");
+				    				System.out.println("Produto não encontrado!");
+				    				System.out.println("");
+				    				System.out.println("");
+				    			}
+			    			}
+			    			
+			    		}
+		    	  }	
+		    	} else {
+		    		System.out.println("");
+		    		System.out.println("Senha ou Login errado!");
+		    	}
+
+			} else if(choice == 2) {          //Configurações
+				Admin ad = new Admin();
+		    	ad.operador = false;   //Nenhum objeto da classe Usuário pode ser instanciado para inicializar o construtor e tornar a variavel Operador = false;
+		    	
+		    	if(ad.operador == false) {
+		    		System.out.println("            Sistema de Vendas - Modo Administrador");
+		    		System.out.println("\n");
+		    		System.out.print("Senha: ");
+		    		String senha = scan.next();
+		    		
+		    		if(senha.equals("SauloDaniel")) {      //Implementar um banco de senhas de administrador no SQLite. Vide Obs1A.
+		    			int ret = 0;
+		    			
+		    			while(ret == 0) {
+		    				System.out.println("\n");
+		        			System.out.println("1 - Criar contas para Login.");
+		        			System.out.println("2 - Cadastrar produtos.");
+		        			System.out.println("3 - Apagar produtos.");
+		        			System.out.println("4 - Apagar conta.");  //Concertar. Não está funcionando
+		        			System.out.println("5 - Sair.");
+		        			System.out.println("\n");
+		        			System.out.print("Escolha: ");
+		        			int choice1 = scan.nextInt();
+		        			
+		        			if(choice1 == 1) {       //Criação de contas para Login
+		                      
+		          			  ret = -1;
+		        			  while(ret != 0) {
+		        				System.out.println("\n");
+		          				
+		          				System.out.println("        Criação de contas de Login");
+		          				System.out.println("\n");
+		          				System.out.print("Novo Login: ");
+		          				String login = scan.next();
+		          				op.setLogin(login);   //Cadastro de login no objeto da classe Operador
+		          				System.out.println("");
+		          				System.out.print("Senha: ");
+		          				senha = scan.next(); //Reutilização de variável
+		          				op.setPassword(senha);  //Cadastro de senha no objeto da classe Operador
+		          				db.setOperator(op);  //Cadastro do objeto da classe Operador no objeto da classe DataBank
+		          				boolean checkLogin, checkPassword = false;
+		          				
+		          				//Checagem
+		          				checkLogin = db.searchLogin(op);     
+		          				checkPassword = db.searchPassword(op);
+		          				
+		          				if(checkLogin & checkPassword) {
+		          					System.out.println("Conta cadastrada com sucesso!");
+		          				} else {
+		          					System.out.println("Conta não cadastrada!");
+		          				}
+		          				
+		          				System.out.println("Deseja adicionar outra conta? 1 - Sim  0 - Não");
+		          				System.out.print("\nEscolha: ");
+		          				ret = scan.nextInt();
+		        			  }
+		        			  
+		        			} else if(choice1 == 2) {  //Cadastrar produtos
+		                        
+		        				ret = -1;
+		          			    while(ret != 0) {
+		          			        System.out.println("\n");
+		           				 
+		           				    System.out.println("         Cadastro de Produtos");
+		           				    System.out.println("\n");
+		           				    System.out.println("Nome do produto: ");
+		           				    String name = scan.next();
+		           				    System.out.println("Código de Barras: ");
+		           				    String code = scan.next();
+		           				    System.out.println("Valor: ");
+		           				    double value = scan.nextDouble();
+		           				    System.out.println("Quantidade: ");
+		           				    int qtde = scan.nextInt();
+		           				    Produto prod = new Produto(code, name, value, qtde);
+		           				 
+		           				    boolean check = pb.setItem(prod.getCode(), prod);
+		           				 
+		           				    if(check == true) {
+		           					    System.out.println("Produto cadastrado com sucesso!");
+		           				    } else {
+		           					    System.out.println("Produto não cadastrado!");
+		           				    }
+		           				    
+		           				    System.out.println("Deseja adicionar outro produto? 1 - Sim  0 - Não");
+		           				    System.out.print("\nEscolha: ");
+		           				    ret = scan.nextInt();
+		          			    }
+		        				 
+		        			} else if(choice1 == 3) {   //Apagar produtos
+
+		        				
+		        				ret = -1;
+		          			    while(ret != 0) {
+		          			    	System.out.println("\n");
+		            				System.out.println("\n");
+		            				System.out.print("Digite o número do código de barras: ");
+		            				String code = scan.next();
+		            				boolean check = pb.apagaItem(code);
+		            				System.out.println("\n");
+		            				
+		            				if(check == true) {
+		            					System.out.println("Produto apagado.");
+		            				} else {
+		            					System.out.println("Produto não apagado. Tente novamente");
+		            				}
+		            				
+		            				System.out.println("Deseja apagar outro produto? 1 - Sim  0 - Não");
+		           				    System.out.print("\nEscolha: ");
+		           				    ret = scan.nextInt();
+		          			    }
+		        				
+		        				
+		        			} else if(choice1 == 4) {    //Apagar conta de operador
+
+		        				
+		        				ret = -1;
+		          			    while(ret != 0) {
+		          			    	System.out.println("\n");
+		            				System.out.println("\n");
+		            				System.out.print("Digite o nome do Login: ");
+		            				String login = scan.next();
+		            				boolean check = db.apagaOperador(login);
+		            				System.out.println("\n");
+		            				
+		            				if(check == true) {
+		            					System.out.println("Produto apagado.");
+		            				} else {
+		            					System.out.println("Produto não apagado. Tente novamente.");
+		            				}
+		            				
+		            				System.out.println("Deseja apagar outra conta? 1 - Sim  0 - Não");
+		           				    System.out.print("\nEscolha: ");
+		           				    ret = scan.nextInt();
+		          			    }
+		          			    
+		        			}  else if(choice1 == 5) {
+		        				ret = choice;
+		        			}
+		        		}
+		    	    }
+		    			
+		    		
+		    	}
+			} else if(choice == 0) {
+				option = choice;
 			}
 		}
-		
-		return check;
 	}
-	
 }
+
+//OBS1A: Assim como no Sistema Operacional Windows, quando se compra o disco do Sistema, vem um número serial que ativa-o.
+//Dessa forma também será o nosso sistema. Onde cada senha é dada para cada pessoa que comprar o sistema para implementar no computador de sua loja.
