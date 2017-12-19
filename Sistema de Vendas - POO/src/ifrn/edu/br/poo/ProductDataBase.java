@@ -2,7 +2,7 @@ package ifrn.edu.br.poo;
 
 import java.util.HashMap;
 
-public class ProductBank {
+public class ProductDataBase {
 	private HashMap<String,Produto> itens = new HashMap<String, Produto>();
 	
 	public boolean setItem(String chave, Produto item) {

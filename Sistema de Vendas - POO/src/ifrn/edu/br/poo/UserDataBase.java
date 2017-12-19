@@ -1,9 +1,8 @@
 
 package ifrn.edu.br.poo;
 import java.util.ArrayList;
-import java.util.Collection;
 
-public class DataBank {
+public class UserDataBase {
 
     private ArrayList <Operador> operator = new ArrayList<Operador>();
     

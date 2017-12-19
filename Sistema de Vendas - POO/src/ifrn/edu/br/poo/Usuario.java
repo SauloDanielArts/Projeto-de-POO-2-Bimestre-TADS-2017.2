@@ -15,8 +15,10 @@ public abstract class Usuario implements Login{
     	this.operador = operador;
     }
 	
+	@Override
 	public abstract String getPassword();
 
+	@Override
 	public abstract void setPassword(String a);
 	
 	public void escolheOperador() {

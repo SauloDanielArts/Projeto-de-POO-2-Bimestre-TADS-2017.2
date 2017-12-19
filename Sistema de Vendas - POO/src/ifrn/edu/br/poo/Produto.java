@@ -2,8 +2,6 @@ package ifrn.edu.br.poo;
 
 public class Produto {
    
-	//Não se faz necessário o uso de descrição pois foge dos requisitos de um caixa.
-	
    private String code;
    private String nome;
    private double valor;
