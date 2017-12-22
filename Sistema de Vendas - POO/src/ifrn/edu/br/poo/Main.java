@@ -136,25 +136,17 @@ public class Main {
 					System.out.println(" Painel de Vendas");
 					System.out.println(" Operador: " + operador.getLogin());
 					System.out.println("");
-					System.out.print("\n N� de produtos: ");
-
+					
 					int num = 0;
-
-					num = scan.nextInt();
-
 					boolean valido = true;
 					do {
-
-						scan.nextInt();
-
+						System.out.print("\n N� de produtos: ");
 						try {
-
-							opticao = Integer.parseInt(scan.next());
+							num = Integer.parseInt(scan.next());
 						} catch (Exception e) {
 							System.out.println("\n\n Numero não e valido");
 							valido = false;
 						}
-
 					} while (valido == false);
 
 					System.out.print("\n\nC�digo de Barras: ");
@@ -180,8 +172,19 @@ public class Main {
 				}
 
 				System.out.println("\n");
-				System.out.println("Dinheiro: ");
-				double entrada = scan.nextDouble();
+				
+				double entrada = 0;
+				boolean valido = true;
+				do {
+					System.out.println("Dinheiro: ");
+					try {
+						entrada = Double.parseDouble(scan.next());
+					} catch (Exception e) {
+						System.out.println("\n\n Valor do dinheiro invalido");
+						valido = false;
+					}
+				} while (valido == false);
+				
 
 				if (entrada >= venda.getTotal()) {
 					double troco = (entrada - venda.getTotal());
@@ -307,6 +310,9 @@ public class Main {
 
 					opticao = -1;
 					do {
+						boolean valido = false;
+						
+						
 						System.out.println("\n");
 
 						System.out.println(" Cadastro de Produtos");
@@ -315,10 +321,45 @@ public class Main {
 						String name = scan.next();
 						System.out.println("C�digo de Barras: ");
 						String code = scan.next();
-						System.out.println("Valor: ");
-						double value = scan.nextDouble();
-						System.out.println("Quantidade: ");
-						int qtde = scan.nextInt();
+						
+						
+						double value = 0;
+						valido = false;
+						do {
+							System.out.println("Valor: ");
+						   try 
+						     {
+							  value = Double.parseDouble(scan.next());
+							  valido = true;
+						     } 
+						   catch (Exception e) 
+						   {
+							  System.out.println("\n\n O valor não e valido\n\n");
+						   }
+						
+						}while(valido==false);
+						
+						
+						
+						int qtde =0;
+						valido = false;
+						do {
+							System.out.println("Quantidade: ");
+						   try 
+						     {
+							   qtde =  Integer.parseInt(scan.next());
+							   valido = true;
+						     } 
+						   catch (Exception e) 
+						   {
+							  System.out.println("\n\n A quantidade não e valida\n\n");
+						   }
+						
+						}while(valido==false);
+						
+						
+						
+						
 						Produto prod = new Produto(code, name, value, qtde);
 
 						boolean check = productDataBase.setItem(prod.getCode(), prod);
